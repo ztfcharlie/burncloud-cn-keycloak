@@ -8,9 +8,6 @@
 ```bash
 # 初始化环境目录
 ./run.sh init
-
-# 生成自签名证书
-./run.sh certs
 ```
 
 ### 2. 启动服务
@@ -54,7 +51,7 @@
 ## 🔧 配置详情
 
 ### 服务组件
-- **Keycloak**: 主认证服务器 (端口 8080/8443)
+- **Keycloak**: 主认证服务器 (端口 8080)
 - **PostgreSQL**: 数据持久化 (端口 5432)
 - **Redis**: 会话缓存 (端口 6379)
 
@@ -80,7 +77,6 @@
 
 ### 开放端口
 - `8080`: Keycloak HTTP (内部)
-- `8443`: Keycloak HTTPS (内部)
 - `5432`: PostgreSQL (内部)
 - `6379`: Redis (内部)
 
@@ -106,9 +102,6 @@ KEYCLOAK_ADMIN_PASSWORD=burncloud2024
 # Redis Password
 REDIS_PASSWORD=kc_redis_2P6jQ9mR5x7vL4nK
 
-# Keycloak HTTPS Certificate Files
-KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/conf/server.crt.pem
-KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/conf/server.key.pem
 ```
 
 ## 🛠️ 常用命令
@@ -117,9 +110,6 @@ KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/conf/server.key.pem
 ```bash
 # 初始化环境
 ./run.sh init
-
-# 生成证书
-./run.sh certs
 
 # 导入领域配置
 ./run.sh import
@@ -152,12 +142,28 @@ docker-compose exec -T burncloud-cn-keycloak-postgres psql -U keycloak keycloak_
 1. **管理员密码**: 修改默认的 KEYCLOAK_ADMIN_PASSWORD
 2. **数据库密码**: 更新 KEYCLOAK_DB_PASSWORD
 3. **Redis密码**: 更新 REDIS_PASSWORD
-4. **SSL证书**: 使用有效的 SSL 证书替换自签名证书
 
-### 证书管理
-```bash
-# 重新生成证书
-./run.sh certs
+## 🌐 网络配置
+
+### 反向代理设置
+Keycloak 配置为在反向代理（如 nginx）后面运行：
+- `KC_PROXY=edge` - 启用边缘代理模式
+- `KC_HTTP_ENABLED=true` - 启用 HTTP（代理处理 HTTPS）
+
+当使用反向代理时，确保代理正确设置以下头部：
+- `X-Forwarded-For`
+- `X-Forwarded-Proto`
+- `X-Forwarded-Host`
+
+示例 nginx 配置：
+```nginx
+location / {
+    proxy_pass http://172.22.0.10:8080;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
 ```
 
 ## 🔍 故障排除

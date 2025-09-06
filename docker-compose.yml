@@ -21,12 +21,9 @@ services:
       - KC_HTTP_ENABLED=true
       - KC_HEALTH_ENABLED=true
       - KC_METRICS_ENABLED=true
-      - KC_HTTPS_CERTIFICATE_FILE=${KC_HTTPS_CERTIFICATE_FILE}
-      - KC_HTTPS_CERTIFICATE_KEY_FILE=${KC_HTTPS_CERTIFICATE_KEY_FILE}
     volumes:
       - ./data/keycloak:/opt/keycloak/data
       - ./logs/keycloak:/opt/keycloak/logs
-      - ./keycloak-certs:/opt/keycloak/conf
       - ./realms:/opt/keycloak/data/import
     command: start --optimized -Dkeycloak.import=/opt/keycloak/data/import/burncloud-realm.json
     depends_on:
