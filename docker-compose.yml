@@ -22,6 +22,7 @@ services:
       - KC_HTTP_ENABLED=true
       - KC_HEALTH_ENABLED=true
       - KC_METRICS_ENABLED=true
+      - KC_TRANSACTION_XA_ENABLED=false
     volumes:
       - ./data/keycloak:/opt/keycloak/data
       - ./logs/keycloak:/opt/keycloak/logs
