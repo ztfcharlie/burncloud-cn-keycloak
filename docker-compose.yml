@@ -27,7 +27,7 @@ services:
       - ./data/keycloak:/opt/keycloak/data
       - ./logs/keycloak:/opt/keycloak/logs
       - ./realms:/opt/keycloak/data/import
-    command: start -Dkeycloak.import=/opt/keycloak/data/import/burncloud-realm.json
+    command: start
     depends_on:
       - burncloud-cn-keycloak-postgres
       - burncloud-cn-keycloak-redis
