@@ -33,6 +33,7 @@ services:
     networks:
       burncloud-keycloak:
         ipv4_address: 172.22.0.10
+      burncloud-proxy:
 
   burncloud-cn-keycloak-postgres:
     image: postgres:15-alpine
@@ -66,3 +67,5 @@ networks:
     ipam:
       config:
         - subnet: 172.22.0.0/16
+  burncloud-proxy:
+    external: true

@@ -158,13 +158,30 @@ Keycloak 配置为在反向代理（如 nginx）后面运行：
 示例 nginx 配置：
 ```nginx
 location / {
-    proxy_pass http://172.22.0.10:8080;
+    proxy_pass http://burncloud-cn-keycloak:8080;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
 }
 ```
+
+### 外部访问端口
+外部 nginx 代理需要将请求转发到 Keycloak 的 8080 端口：
+- **服务名称**: burncloud-cn-keycloak:8080
+- **协议**: HTTP
+
+注意：Keycloak 仅在内部网络监听 8080 端口，不直接对外暴露。外部访问必须通过 nginx 代理。
+
+### 访问方式说明
+Keycloak 仅支持通过 nginx 代理访问：
+- URL: https://testauth.burncloud.cn
+- nginx 代理转发到: http://burncloud-cn-keycloak:8080
+
+**安全建议**：
+- 不要将 Keycloak 的端口直接暴露给公网
+- 始终通过 nginx 代理访问 Keycloak
+- 确保容器在同一个 Docker 网络中以使用服务名称访问
 
 ## 🔍 故障排除
 
