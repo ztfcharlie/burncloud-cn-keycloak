@@ -90,6 +90,7 @@
 KC_HOSTNAME=testauth.burncloud.cn
 
 # Keycloak Database Configuration
+KC_DB=postgres
 KC_DB_USERNAME=keycloak
 KC_DB_URL=jdbc:postgresql://burncloud-cn-keycloak-postgres:5432/keycloak_db
 
@@ -125,6 +126,9 @@ REDIS_PASSWORD=kc_redis_2P6jQ9mR5x7vL4nK
 
 # 查看状态
 ./run.sh status
+
+# 证书管理
+# run.sh init 命令会自动从 /etc/letsencrypt/live 目录复制证书到 ./certs 目录
 ```
 
 ### 数据管理

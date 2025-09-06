@@ -20,6 +20,21 @@ init_env() {
     chmod -R 777 ./data
     chmod -R 777 ./logs
     
+    # Copy certificates
+    if [ -d "/etc/letsencrypt/live" ]; then
+        echo "Copying certificates..."
+        mkdir -p ./certs
+        # Copy certificates for all domains found in the live directory
+        for domain_dir in /etc/letsencrypt/live/*; do
+            if [ -d "$domain_dir" ]; then
+                domain=$(basename "$domain_dir")
+                echo "Copying certificates for domain: $domain"
+                cp "/etc/letsencrypt/live/$domain/fullchain.pem" "./certs/${domain}-fullchain.pem" 2>/dev/null || true
+                cp "/etc/letsencrypt/live/$domain/privkey.pem" "./certs/${domain}-privkey.pem" 2>/dev/null || true
+            fi
+        done
+    fi
+    
     echo "Environment initialization completed."
 }
 
