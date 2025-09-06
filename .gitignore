@@ -2,6 +2,10 @@
 /postgres_data/
 /keycloak_data/
 /redis_data/
+/data/
+/logs/
+/certs/
+/keycloak-certs/
 
 # 日志文件
 *.log
