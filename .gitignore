@@ -1,0 +1,52 @@
+# 数据目录
+/postgres_data/
+/keycloak_data/
+/redis_data/
+
+# 日志文件
+*.log
+logs/
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 编辑器和IDE文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 系统文件
+Thumbs.db
+.directory
+
+# 编译文件
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Node.js (如果有前端项目)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# 其他可能的临时文件
+*.bak
+*.backup
+*.old

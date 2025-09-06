@@ -1,14 +1,14 @@
 # Docker Compose重写配置文件
 # 用于开发环境的特殊配置，不会影响基础的docker-compose.yml
 
-version: '3.8'
+version: '3.3'
 
 services:
   keycloak:
     # 开发环境专用配置
     environment:
       # 启用开发模式功能
-      KC_DEV_MODE: true
+      KC_DEV_MODE: "true"
       # 启用详细日志
       KC_LOG_CONSOLE_FORMAT: "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"
       # 启用调试信息
@@ -25,7 +25,7 @@ services:
       - ./realms:/opt/keycloak/data/import:ro
       - ./themes:/opt/keycloak/themes:ro
       - ./logs:/opt/keycloak/data/log
-      - keycloak_data:/opt/keycloak/data
+      - ./keycloak_data:/opt/keycloak/data
 
   keycloak-db:
     # 开发环境数据库配置
@@ -40,13 +40,5 @@ services:
     
     # 开发环境卷映射  
     volumes:
-      - keycloak_postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
       - ./db-init:/docker-entrypoint-initdb.d:ro
-
-volumes:
-  keycloak_postgres_data:
-    driver: local
-  keycloak_data:
-    driver: local
-  keycloak_redis_data:
-    driver: local
