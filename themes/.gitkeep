@@ -1,0 +1,18 @@
+# 自定义主题目录
+# 
+# 如果需要自定义Keycloak的登录界面，可以在此目录下创建主题文件
+# 
+# 主题结构示例：
+# themes/
+# └── burncloud-theme/
+#     ├── login/
+#     │   ├── theme.properties
+#     │   ├── login.ftl
+#     │   └── resources/
+#     │       └── css/
+#     │           └── login.css
+#     └── account/
+#         ├── theme.properties
+#         └── account.ftl
+#
+# 更多信息请参考: https://www.keycloak.org/docs/latest/server_development/#_themes

@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # PostgreSQL数据库 - Keycloak专用
+  keycloak-db:
+    image: postgres:15-alpine
+    container_name: keycloak-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_password_2024
+    volumes:
+      - keycloak_postgres_data:/var/lib/postgresql/data
+    networks:
+      - keycloak-network
+    ports:
+      - "5433:5432"  # 避免与其他PostgreSQL冲突
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Keycloak认证服务器
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    container_name: keycloak-server
+    restart: unless-stopped
+    command: start-dev --import-realm
+    environment:
+      # 数据库配置
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_password_2024
+      
+      # 管理员账户
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      
+      # 主机名和代理配置
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HTTP_ENABLED: true
+      KC_PROXY: edge
+      
+      # 开发模式配置
+      KC_LOG_LEVEL: INFO
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      
+    volumes:
+      # 导入Realm配置
+      - ./realms:/opt/keycloak/data/import:ro
+      - ./themes:/opt/keycloak/themes:ro
+      - keycloak_data:/opt/keycloak/data
+      
+    ports:
+      - "8080:8080"
+      - "8443:8443"  # HTTPS端口（如需要）
+      
+    networks:
+      - keycloak-network
+      
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+        
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Redis缓存 (可选，用于会话存储)
+  keycloak-redis:
+    image: redis:7-alpine
+    container_name: keycloak-redis
+    restart: unless-stopped
+    command: redis-server --requirepass keycloak_redis_2024
+    volumes:
+      - keycloak_redis_data:/data
+    ports:
+      - "6380:6379"  # 避免与其他Redis冲突
+    networks:
+      - keycloak-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  keycloak_postgres_data:
+    driver: local
+  keycloak_data:
+    driver: local
+  keycloak_redis_data:
+    driver: local
+
+networks:
+  keycloak-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
