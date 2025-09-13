@@ -24,6 +24,7 @@ services:
       - KC_METRICS_ENABLED=true
       - KC_TRANSACTION_XA_ENABLED=false
     volumes:
+      - ./themes/burncloud:/opt/keycloak/themes/burncloud
       - ./data/keycloak:/opt/keycloak/data
       - ./logs/keycloak:/opt/keycloak/logs
       - ./realms:/opt/keycloak/data/import
