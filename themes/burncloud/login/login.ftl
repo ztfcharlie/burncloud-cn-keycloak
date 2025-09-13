@@ -26,30 +26,18 @@
                     </button>
                 </div>
                 <div class="language-selector">
-                    <button class="language-selector-btn" id="language-selector-btn" aria-haspopup="true" aria-expanded="false">
-                        <span class="selected-language">
-                            <#if locale.current == 'zh-CN'>
-                                中文
-                            <#else>
-                                English
-                            </#if>
-                        </span>
-                        <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <ul class="language-dropdown" id="language-dropdown" role="menu">
-                        <li role="menuitem">
-                            <a href="${url.loginUrl}?kc_locale=zh-CN" class="language-option ${locale.current == 'zh-CN'?then('active', '')}">
-                                中文
-                            </a>
-                        </li>
-                        <li role="menuitem">
-                            <a href="${url.loginUrl}?kc_locale=en" class="language-option ${locale.current == 'en'?then('active', '')}">
-                                English
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="custom-dropdown" id="language-dropdown">
+                        <div class="dropdown-selected" id="dropdown-selected">
+                            <span class="selected-text"><#if locale.current == 'zh-CN'>中文<#else>English</#if></span>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="dropdown-options" id="dropdown-options">
+                            <div class="dropdown-option <#if locale.current == 'zh-CN'>selected</#if>" data-value="zh-CN">中文</div>
+                            <div class="dropdown-option <#if locale.current == 'en'>selected</#if>" data-value="en">English</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
