@@ -26,10 +26,18 @@
                     </button>
                 </div>
                 <div class="language-selector">
-                    <select id="language-selector" onchange="changeLanguage(this.value)">
-                        <option value="zh-CN" <#if locale.current == 'zh-CN'>selected</#if>>中文</option>
-                        <option value="en" <#if locale.current == 'en'>selected</#if>>English</option>
-                    </select>
+                    <div class="custom-dropdown" id="language-dropdown">
+                        <div class="dropdown-selected" id="dropdown-selected">
+                            <span class="selected-text"><#if locale.current == 'zh-CN'>中文<#else>English</#if></span>
+                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                        <div class="dropdown-options" id="dropdown-options">
+                            <div class="dropdown-option <#if locale.current == 'zh-CN'>selected</#if>" data-value="zh-CN">中文</div>
+                            <div class="dropdown-option <#if locale.current == 'en'>selected</#if>" data-value="en">English</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

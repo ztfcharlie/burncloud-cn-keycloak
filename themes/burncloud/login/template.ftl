@@ -116,15 +116,6 @@
             align-items: center;
         }
 
-        .language-selector select {
-            padding: 0.5rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background-color: var(--background);
-            color: var(--foreground);
-            cursor: pointer;
-        }
-
         .sun-icon, .moon-icon {
             width: 1.5rem;
             height: 1.5rem;

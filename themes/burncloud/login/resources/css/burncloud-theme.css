@@ -135,6 +135,104 @@ body {
 .dark .language-selector select:hover {
     border-color: hsl(var(--primary)) !important;
 }
+
+/* Custom Dropdown Styles */
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    font-size: 0.875rem;
+}
+
+.dropdown-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dropdown-selected:hover {
+    border-color: hsl(var(--primary));
+}
+
+.dropdown-selected:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s ease;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+    margin-top: 0.25rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+}
+
+.dropdown-options.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.dropdown-option:hover {
+    background: hsl(var(--muted));
+}
+
+.dropdown-option.selected {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
+
+/* Dark Theme Custom Dropdown */
+.dark .dropdown-selected {
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    border-color: hsl(var(--border));
+}
+
+.dark .dropdown-options {
+    background: hsl(var(--card));
+    border-color: hsl(var(--border));
+}
+
+.dark .dropdown-option:hover {
+    background: hsl(var(--muted));
+}
+
+.dark .dropdown-option.selected {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+}
 .language-selector select:hover {
     border-color: hsl(var(--primary));
 }
