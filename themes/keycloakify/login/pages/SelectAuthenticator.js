@@ -1,0 +1,10 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { getKcClsx } from "../../login/lib/kcClsx";
+export default function SelectAuthenticator(props) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { url, auth } = kcContext;
+    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+    const { msg, advancedMsg } = i18n;
+    return (_jsx(Template, Object.assign({ kcContext: kcContext, i18n: i18n, doUseDefaultCss: doUseDefaultCss, classes: classes, displayInfo: false, headerNode: msg("loginChooseAuthenticator") }, { children: _jsx("form", Object.assign({ id: "kc-select-credential-form", className: kcClsx("kcFormClass"), action: url.loginAction, method: "post" }, { children: _jsx("div", Object.assign({ className: kcClsx("kcSelectAuthListClass") }, { children: auth.authenticationSelections.map((authenticationSelection, i) => (_jsxs("button", Object.assign({ className: kcClsx("kcSelectAuthListItemClass"), type: "submit", name: "authenticationExecution", value: authenticationSelection.authExecId }, { children: [_jsx("div", Object.assign({ className: kcClsx("kcSelectAuthListItemIconClass") }, { children: _jsx("i", { className: kcClsx("kcSelectAuthListItemIconPropertyClass", authenticationSelection.iconCssClass) }) })), _jsxs("div", Object.assign({ className: kcClsx("kcSelectAuthListItemBodyClass") }, { children: [_jsx("div", Object.assign({ className: kcClsx("kcSelectAuthListItemHeadingClass") }, { children: advancedMsg(authenticationSelection.displayName) })), _jsx("div", Object.assign({ className: kcClsx("kcSelectAuthListItemDescriptionClass") }, { children: advancedMsg(authenticationSelection.helpText) }))] })), _jsx("div", { className: kcClsx("kcSelectAuthListItemFillClass") }), _jsx("div", Object.assign({ className: kcClsx("kcSelectAuthListItemArrowClass") }, { children: _jsx("i", { className: kcClsx("kcSelectAuthListItemArrowIconClass") }) }))] }), i))) })) })) })));
+}
+//# sourceMappingURL=SelectAuthenticator.js.map

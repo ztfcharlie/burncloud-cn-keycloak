@@ -1,0 +1,282 @@
+"use strict";
+exports.id = 658;
+exports.ids = [658];
+exports.modules = {
+
+/***/ 18040:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "command": () => (/* binding */ command)
+/* harmony export */ });
+/* harmony import */ var _shared_customHandler_delegate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(72138);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _shared_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(173);
+/* harmony import */ var _tools_readThisNpmPackageVersion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(64795);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(89693);
+/* harmony import */ var _tools_transformCodebase__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(60332);
+/* harmony import */ var _tools_getThisCodebaseRootDirPath__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(58822);
+
+
+
+
+
+
+
+
+async function command(params) {
+    const { buildContext } = params;
+    const { hasBeenHandled } = await (0,_shared_customHandler_delegate__WEBPACK_IMPORTED_MODULE_0__/* .maybeDelegateCommandToCustomHandler */ .q)({
+        commandName: "copy-keycloak-resources-to-public",
+        buildContext
+    });
+    if (hasBeenHandled) {
+        return;
+    }
+    const destDirPath = (0,path__WEBPACK_IMPORTED_MODULE_1__.join)(buildContext.publicDirPath, _shared_constants__WEBPACK_IMPORTED_MODULE_2__/* .WELL_KNOWN_DIRECTORY_BASE_NAME.KEYCLOAKIFY_DEV_RESOURCES */ .Ju.KEYCLOAKIFY_DEV_RESOURCES);
+    const keycloakifyBuildinfoFilePath = (0,path__WEBPACK_IMPORTED_MODULE_1__.join)(destDirPath, "keycloakify.buildinfo");
+    const keycloakifyBuildinfoRaw = JSON.stringify({
+        keycloakifyVersion: (0,_tools_readThisNpmPackageVersion__WEBPACK_IMPORTED_MODULE_3__/* .readThisNpmPackageVersion */ .K)()
+    }, null, 2);
+    skip_if_already_done: {
+        if (!fs__WEBPACK_IMPORTED_MODULE_4__.existsSync(keycloakifyBuildinfoFilePath)) {
+            break skip_if_already_done;
+        }
+        const keycloakifyBuildinfoRaw_previousRun = fs__WEBPACK_IMPORTED_MODULE_4__.readFileSync(keycloakifyBuildinfoFilePath)
+            .toString("utf8");
+        if (keycloakifyBuildinfoRaw_previousRun !== keycloakifyBuildinfoRaw) {
+            break skip_if_already_done;
+        }
+        return;
+    }
+    (0,_tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_5__/* .rmSync */ .a)(destDirPath, { force: true, recursive: true });
+    // NOTE: To remove in a while, remove the legacy keycloak-resources directory
+    (0,_tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_5__/* .rmSync */ .a)((0,path__WEBPACK_IMPORTED_MODULE_1__.join)((0,path__WEBPACK_IMPORTED_MODULE_1__.dirname)(destDirPath), "keycloak-resources"), {
+        force: true,
+        recursive: true
+    });
+    (0,_tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_5__/* .rmSync */ .a)((0,path__WEBPACK_IMPORTED_MODULE_1__.join)((0,path__WEBPACK_IMPORTED_MODULE_1__.dirname)(destDirPath), ".keycloakify"), {
+        force: true,
+        recursive: true
+    });
+    fs__WEBPACK_IMPORTED_MODULE_4__.mkdirSync(destDirPath, { recursive: true });
+    fs__WEBPACK_IMPORTED_MODULE_4__.writeFileSync((0,path__WEBPACK_IMPORTED_MODULE_1__.join)(destDirPath, ".gitignore"), Buffer.from("*", "utf8"));
+    (0,_tools_transformCodebase__WEBPACK_IMPORTED_MODULE_6__/* .transformCodebase */ .N)({
+        srcDirPath: (0,path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_tools_getThisCodebaseRootDirPath__WEBPACK_IMPORTED_MODULE_7__/* .getThisCodebaseRootDirPath */ .e)(), "res", "public", _shared_constants__WEBPACK_IMPORTED_MODULE_2__/* .WELL_KNOWN_DIRECTORY_BASE_NAME.KEYCLOAKIFY_DEV_RESOURCES */ .Ju.KEYCLOAKIFY_DEV_RESOURCES),
+        destDirPath
+    });
+    fs__WEBPACK_IMPORTED_MODULE_4__.writeFileSync((0,path__WEBPACK_IMPORTED_MODULE_1__.join)(destDirPath, "README.txt"), Buffer.from(
+    // prettier-ignore
+    [
+        "This directory is only used in dev mode by Keycloakify",
+        "It won't be included in your final build.",
+        "Do not modify anything in this directory.",
+    ].join("\n")));
+    fs__WEBPACK_IMPORTED_MODULE_4__.writeFileSync(keycloakifyBuildinfoFilePath, Buffer.from(keycloakifyBuildinfoRaw, "utf8"));
+}
+//# sourceMappingURL=copy-keycloak-resources-to-public.js.map
+
+/***/ }),
+
+/***/ 12171:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "h": () => (/* binding */ SemVer)
+/* harmony export */ });
+var SemVer;
+(function (SemVer) {
+    const bumpTypes = ["major", "minor", "patch", "rc", "no bump"];
+    function parse(versionStr) {
+        const match = versionStr.match(/^v?([0-9]+)\.([0-9]+)(?:\.([0-9]+))?(?:-rc.([0-9]+))?$/);
+        if (!match) {
+            throw new Error(`${versionStr} is not a valid semantic version`);
+        }
+        const semVer = Object.assign({ major: parseInt(match[1]), minor: parseInt(match[2]), patch: (() => {
+                const str = match[3];
+                return str === undefined ? 0 : parseInt(str);
+            })() }, (() => {
+            const str = match[4];
+            return str === undefined ? {} : { rc: parseInt(str) };
+        })());
+        const initialStr = stringify(semVer);
+        Object.defineProperty(semVer, "parsedFrom", {
+            enumerable: true,
+            get: function () {
+                const currentStr = stringify(this);
+                if (currentStr !== initialStr) {
+                    throw new Error(`SemVer.parsedFrom can't be read anymore, the version have been modified from ${initialStr} to ${currentStr}`);
+                }
+                return versionStr;
+            }
+        });
+        return semVer;
+    }
+    SemVer.parse = parse;
+    function stringify(v) {
+        return `${v.major}.${v.minor}.${v.patch}${v.rc === undefined ? "" : `-rc.${v.rc}`}`;
+    }
+    SemVer.stringify = stringify;
+    /**
+     *
+     * v1  <  v2  => -1
+     * v1 === v2  => 0
+     * v1  >  v2  => 1
+     *
+     */
+    function compare(v1, v2) {
+        const sign = (diff) => (diff === 0 ? 0 : diff < 0 ? -1 : 1);
+        const noUndefined = (n) => n !== null && n !== void 0 ? n : Infinity;
+        for (const level of ["major", "minor", "patch", "rc"]) {
+            if (noUndefined(v1[level]) !== noUndefined(v2[level])) {
+                return sign(noUndefined(v1[level]) - noUndefined(v2[level]));
+            }
+        }
+        return 0;
+    }
+    SemVer.compare = compare;
+    /*
+    console.log(compare(parse("3.0.0-rc.3"), parse("3.0.0")) === -1 )
+    console.log(compare(parse("3.0.0-rc.3"), parse("3.0.0-rc.4")) === -1 )
+    console.log(compare(parse("3.0.0-rc.3"), parse("4.0.0")) === -1 )
+    */
+    function bumpType(params) {
+        const versionAhead = typeof params.versionAhead === "string"
+            ? parse(params.versionAhead)
+            : params.versionAhead;
+        const versionBehind = typeof params.versionBehind === "string"
+            ? parse(params.versionBehind)
+            : params.versionBehind;
+        if (compare(versionBehind, versionAhead) === 1) {
+            throw new Error(`Version regression ${stringify(versionBehind)} -> ${stringify(versionAhead)}`);
+        }
+        for (const level of ["major", "minor", "patch", "rc"]) {
+            if (versionBehind[level] !== versionAhead[level]) {
+                return level;
+            }
+        }
+        return "no bump";
+    }
+    SemVer.bumpType = bumpType;
+})(SemVer || (SemVer = {}));
+//# sourceMappingURL=SemVer.js.map
+
+/***/ }),
+
+/***/ 89693:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "a": () => (/* binding */ rmSync)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _SemVer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12171);
+
+
+
+/**
+ * Polyfill of fs.rmSync(dirPath, { "recursive": true })
+ * For older version of Node
+ */
+function rmSync(dirPath, options) {
+    if (_SemVer__WEBPACK_IMPORTED_MODULE_2__/* .SemVer.compare */ .h.compare(_SemVer__WEBPACK_IMPORTED_MODULE_2__/* .SemVer.parse */ .h.parse(process.version), _SemVer__WEBPACK_IMPORTED_MODULE_2__/* .SemVer.parse */ .h.parse("14.14.0")) > 0) {
+        fs__WEBPACK_IMPORTED_MODULE_0__.rmSync(dirPath, options);
+        return;
+    }
+    const { force = true } = options;
+    if (force && !fs__WEBPACK_IMPORTED_MODULE_0__.existsSync(dirPath)) {
+        return;
+    }
+    const removeDir_rec = (dirPath) => fs__WEBPACK_IMPORTED_MODULE_0__.readdirSync(dirPath).forEach(basename => {
+        const fileOrDirPath = (0,path__WEBPACK_IMPORTED_MODULE_1__.join)(dirPath, basename);
+        if (fs__WEBPACK_IMPORTED_MODULE_0__.lstatSync(fileOrDirPath).isDirectory()) {
+            removeDir_rec(fileOrDirPath);
+            return;
+        }
+        else {
+            fs__WEBPACK_IMPORTED_MODULE_0__.unlinkSync(fileOrDirPath);
+        }
+    });
+    removeDir_rec(dirPath);
+}
+//# sourceMappingURL=fs.rmSync.js.map
+
+/***/ }),
+
+/***/ 60332:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "N": () => (/* binding */ transformCodebase)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57147);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _crawl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(73036);
+/* harmony import */ var _tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(89693);
+
+
+
+
+/**
+ * Apply a transformation function to every file of directory
+ * If source and destination are the same this function can be used to apply the transformation in place
+ * like filtering out some files or modifying them.
+ * */
+function transformCodebase(params) {
+    const { srcDirPath, transformSourceCode } = params;
+    const isTargetSameAsSource = path__WEBPACK_IMPORTED_MODULE_1__.relative(srcDirPath, params.destDirPath) === "";
+    const destDirPath = isTargetSameAsSource
+        ? path__WEBPACK_IMPORTED_MODULE_1__.join(srcDirPath, "..", "tmp_xOsPdkPsTdzPs34sOkHs")
+        : params.destDirPath;
+    fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync(destDirPath, {
+        recursive: true
+    });
+    for (const fileRelativePath of (0,_crawl__WEBPACK_IMPORTED_MODULE_2__/* .crawl */ .J)({
+        dirPath: srcDirPath,
+        returnedPathsType: "relative to dirPath"
+    })) {
+        const filePath = path__WEBPACK_IMPORTED_MODULE_1__.join(srcDirPath, fileRelativePath);
+        const destFilePath = path__WEBPACK_IMPORTED_MODULE_1__.join(destDirPath, fileRelativePath);
+        // NOTE: Optimization, if we don't need to transform the file, just copy
+        // it using the lower level implementation.
+        if (transformSourceCode === undefined) {
+            fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync(path__WEBPACK_IMPORTED_MODULE_1__.dirname(destFilePath), {
+                recursive: true
+            });
+            fs__WEBPACK_IMPORTED_MODULE_0__.copyFileSync(filePath, destFilePath);
+            continue;
+        }
+        const transformSourceCodeResult = transformSourceCode({
+            sourceCode: fs__WEBPACK_IMPORTED_MODULE_0__.readFileSync(filePath),
+            filePath,
+            fileRelativePath
+        });
+        if (transformSourceCodeResult === undefined) {
+            continue;
+        }
+        fs__WEBPACK_IMPORTED_MODULE_0__.mkdirSync(path__WEBPACK_IMPORTED_MODULE_1__.dirname(destFilePath), {
+            recursive: true
+        });
+        const { newFileName, modifiedSourceCode } = transformSourceCodeResult;
+        fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync(path__WEBPACK_IMPORTED_MODULE_1__.join(path__WEBPACK_IMPORTED_MODULE_1__.dirname(destFilePath), newFileName !== null && newFileName !== void 0 ? newFileName : path__WEBPACK_IMPORTED_MODULE_1__.basename(destFilePath)), modifiedSourceCode);
+    }
+    if (isTargetSameAsSource) {
+        (0,_tools_fs_rmSync__WEBPACK_IMPORTED_MODULE_3__/* .rmSync */ .a)(srcDirPath, { recursive: true });
+        fs__WEBPACK_IMPORTED_MODULE_0__.renameSync(destDirPath, srcDirPath);
+    }
+}
+//# sourceMappingURL=transformCodebase.js.map
+
+/***/ })
+
+};
+;

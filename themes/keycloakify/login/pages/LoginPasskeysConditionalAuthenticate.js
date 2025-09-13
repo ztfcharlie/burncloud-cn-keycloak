@@ -1,0 +1,35 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { Fragment } from "react";
+import { clsx } from "../../tools/clsx";
+import { getKcClsx } from "../../login/lib/kcClsx";
+import { useScript } from "../../login/pages/LoginPasskeysConditionalAuthenticate.useScript";
+export default function LoginPasskeysConditionalAuthenticate(props) {
+    var _a;
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { messagesPerField, login, url, usernameHidden, shouldDisplayAuthenticators, authenticators, registrationDisabled, realm } = kcContext;
+    const { msg, msgStr, advancedMsg } = i18n;
+    const { kcClsx } = getKcClsx({
+        doUseDefaultCss,
+        classes
+    });
+    const authButtonId = "authenticateWebAuthnButton";
+    useScript({ authButtonId, kcContext, i18n });
+    return (_jsxs(Template, Object.assign({ kcContext: kcContext, i18n: i18n, doUseDefaultCss: doUseDefaultCss, classes: classes, headerNode: msg("passkey-login-title"), infoNode: realm.registrationAllowed &&
+            !registrationDisabled && (_jsx("div", Object.assign({ id: "kc-registration" }, { children: _jsxs("span", { children: ["$", msg("noAccount"), " ", _jsx("a", Object.assign({ tabIndex: 6, href: url.registrationUrl }, { children: msg("doRegister") }))] }) }))) }, { children: [_jsxs("form", Object.assign({ id: "webauth", action: url.loginAction, method: "post" }, { children: [_jsx("input", { type: "hidden", id: "clientDataJSON", name: "clientDataJSON" }), _jsx("input", { type: "hidden", id: "authenticatorData", name: "authenticatorData" }), _jsx("input", { type: "hidden", id: "signature", name: "signature" }), _jsx("input", { type: "hidden", id: "credentialId", name: "credentialId" }), _jsx("input", { type: "hidden", id: "userHandle", name: "userHandle" }), _jsx("input", { type: "hidden", id: "error", name: "error" })] })), _jsxs("div", Object.assign({ className: kcClsx("kcFormGroupClass"), "no-bottom-margin": "true", style: { marginBottom: 0 } }, { children: [authenticators !== undefined && Object.keys(authenticators).length !== 0 && (_jsxs(_Fragment, { children: [_jsx("form", Object.assign({ id: "authn_select", className: kcClsx("kcFormClass") }, { children: authenticators.authenticators.map((authenticator, i) => (_jsx("input", { type: "hidden", name: "authn_use_chk", readOnly: true, value: authenticator.credentialId }, i))) })), shouldDisplayAuthenticators && (_jsxs(_Fragment, { children: [authenticators.authenticators.length > 1 && (_jsx("p", Object.assign({ className: kcClsx("kcSelectAuthListItemTitle") }, { children: msg("passkey-available-authenticators") }))), _jsx("div", Object.assign({ className: kcClsx("kcFormClass") }, { children: authenticators.authenticators.map((authenticator, i) => (_jsxs("div", Object.assign({ id: `kc-webauthn-authenticator-item-${i}`, className: kcClsx("kcSelectAuthListItemClass") }, { children: [_jsx("i", { className: clsx((() => {
+                                                        const className = kcClsx(authenticator.transports.iconClass);
+                                                        if (className === authenticator.transports.iconClass) {
+                                                            return kcClsx("kcWebAuthnDefaultIcon");
+                                                        }
+                                                        return className;
+                                                    })(), kcClsx("kcSelectAuthListItemIconPropertyClass")) }), _jsxs("div", Object.assign({ className: kcClsx("kcSelectAuthListItemBodyClass") }, { children: [_jsx("div", Object.assign({ id: `kc-webauthn-authenticator-label-${i}`, className: kcClsx("kcSelectAuthListItemHeadingClass") }, { children: advancedMsg(authenticator.label) })), authenticator.transports !== undefined &&
+                                                            authenticator.transports.displayNameProperties !== undefined &&
+                                                            authenticator.transports.displayNameProperties.length !== 0 && (_jsx("div", Object.assign({ id: `kc-webauthn-authenticator-transport-${i}`, className: kcClsx("kcSelectAuthListItemDescriptionClass") }, { children: authenticator.transports.displayNameProperties.map((nameProperty, i, arr) => (_jsxs(Fragment, { children: [_jsxs("span", { children: [" ", advancedMsg(nameProperty), " "] }, i), i !== arr.length - 1 && _jsx("span", { children: ", " })] }, i))) }))), _jsxs("div", Object.assign({ className: kcClsx("kcSelectAuthListItemDescriptionClass") }, { children: [_jsx("span", Object.assign({ id: `kc-webauthn-authenticator-createdlabel-${i}` }, { children: msg("passkey-createdAt-label") })), _jsx("span", Object.assign({ id: `kc-webauthn-authenticator-created-${i}` }, { children: authenticator.createdAt }))] }))] })), _jsx("div", { className: kcClsx("kcSelectAuthListItemFillClass") })] }), i))) }))] }))] })), _jsx("div", Object.assign({ id: "kc-form" }, { children: _jsxs("div", Object.assign({ id: "kc-form-wrapper" }, { children: [realm.password && (_jsx("form", Object.assign({ id: "kc-form-login", action: url.loginAction, method: "post", style: { display: "none" }, onSubmit: event => {
+                                        try {
+                                            // @ts-expect-error
+                                            event.target.login.disabled = true;
+                                        }
+                                        catch (_a) { }
+                                        return true;
+                                    } }, { children: !usernameHidden && (_jsxs("div", Object.assign({ className: kcClsx("kcFormGroupClass") }, { children: [_jsx("label", Object.assign({ htmlFor: "username", className: kcClsx("kcLabelClass") }, { children: msg("passkey-autofill-select") })), _jsx("input", { tabIndex: 1, id: "username", "aria-invalid": messagesPerField.existsError("username"), className: kcClsx("kcInputClass"), name: "username", defaultValue: (_a = login.username) !== null && _a !== void 0 ? _a : "", autoComplete: "username webauthn", type: "text", autoFocus: true }), messagesPerField.existsError("username") && (_jsx("span", Object.assign({ id: "input-error-username", className: kcClsx("kcInputErrorMessageClass"), "aria-live": "polite" }, { children: messagesPerField.get("username") })))] }))) }))), _jsx("div", Object.assign({ id: "kc-form-passkey-button", className: kcClsx("kcFormButtonsClass"), style: { display: "none" } }, { children: _jsx("input", { id: authButtonId, type: "button", autoFocus: true, value: msgStr("passkey-doAuthenticate"), className: kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass") }) }))] })) }))] }))] })));
+}
+//# sourceMappingURL=LoginPasskeysConditionalAuthenticate.js.map

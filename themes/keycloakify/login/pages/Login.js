@@ -1,0 +1,36 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { useState } from "react";
+import { kcSanitize } from "../../lib/kcSanitize";
+import { useIsPasswordRevealed } from "../../tools/useIsPasswordRevealed";
+import { clsx } from "../../tools/clsx";
+import { getKcClsx } from "../../login/lib/kcClsx";
+export default function Login(props) {
+    var _a;
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcClsx } = getKcClsx({
+        doUseDefaultCss,
+        classes
+    });
+    const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
+    const { msg, msgStr } = i18n;
+    const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+    return (_jsx(Template, Object.assign({ kcContext: kcContext, i18n: i18n, doUseDefaultCss: doUseDefaultCss, classes: classes, displayMessage: !messagesPerField.existsError("username", "password"), headerNode: msg("loginAccountTitle"), displayInfo: realm.password && realm.registrationAllowed && !registrationDisabled, infoNode: _jsx("div", Object.assign({ id: "kc-registration-container" }, { children: _jsx("div", Object.assign({ id: "kc-registration" }, { children: _jsxs("span", { children: [msg("noAccount"), " ", _jsx("a", Object.assign({ tabIndex: 8, href: url.registrationUrl }, { children: msg("doRegister") }))] }) })) })), socialProvidersNode: _jsx(_Fragment, { children: realm.password && (social === null || social === void 0 ? void 0 : social.providers) !== undefined && social.providers.length !== 0 && (_jsxs("div", Object.assign({ id: "kc-social-providers", className: kcClsx("kcFormSocialAccountSectionClass") }, { children: [_jsx("hr", {}), _jsx("h2", { children: msg("identity-provider-login-label") }), _jsx("ul", Object.assign({ className: kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass") }, { children: social.providers.map((...[p, , providers]) => (_jsx("li", { children: _jsxs("a", Object.assign({ id: `social-${p.alias}`, className: kcClsx("kcFormSocialAccountListButtonClass", providers.length > 3 && "kcFormSocialAccountGridItem"), type: "button", href: p.loginUrl }, { children: [p.iconClasses && _jsx("i", { className: clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses), "aria-hidden": "true" }), _jsx("span", { className: clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text"), dangerouslySetInnerHTML: { __html: kcSanitize(p.displayName) } })] })) }, p.alias))) }))] }))) }) }, { children: _jsx("div", Object.assign({ id: "kc-form" }, { children: _jsx("div", Object.assign({ id: "kc-form-wrapper" }, { children: realm.password && (_jsxs("form", Object.assign({ id: "kc-form-login", onSubmit: () => {
+                        setIsLoginButtonDisabled(true);
+                        return true;
+                    }, action: url.loginAction, method: "post" }, { children: [!usernameHidden && (_jsxs("div", Object.assign({ className: kcClsx("kcFormGroupClass") }, { children: [_jsx("label", Object.assign({ htmlFor: "username", className: kcClsx("kcLabelClass") }, { children: !realm.loginWithEmailAllowed
+                                        ? msg("username")
+                                        : !realm.registrationEmailAsUsername
+                                            ? msg("usernameOrEmail")
+                                            : msg("email") })), _jsx("input", { tabIndex: 2, id: "username", className: kcClsx("kcInputClass"), name: "username", defaultValue: (_a = login.username) !== null && _a !== void 0 ? _a : "", type: "text", autoFocus: true, autoComplete: "username", "aria-invalid": messagesPerField.existsError("username", "password") }), messagesPerField.existsError("username", "password") && (_jsx("span", { id: "input-error", className: kcClsx("kcInputErrorMessageClass"), "aria-live": "polite", dangerouslySetInnerHTML: {
+                                        __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                    } }))] }))), _jsxs("div", Object.assign({ className: kcClsx("kcFormGroupClass") }, { children: [_jsx("label", Object.assign({ htmlFor: "password", className: kcClsx("kcLabelClass") }, { children: msg("password") })), _jsx(PasswordWrapper, Object.assign({ kcClsx: kcClsx, i18n: i18n, passwordInputId: "password" }, { children: _jsx("input", { tabIndex: 3, id: "password", className: kcClsx("kcInputClass"), name: "password", type: "password", autoComplete: "current-password", "aria-invalid": messagesPerField.existsError("username", "password") }) })), usernameHidden && messagesPerField.existsError("username", "password") && (_jsx("span", { id: "input-error", className: kcClsx("kcInputErrorMessageClass"), "aria-live": "polite", dangerouslySetInnerHTML: {
+                                        __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                    } }))] })), _jsxs("div", Object.assign({ className: kcClsx("kcFormGroupClass", "kcFormSettingClass") }, { children: [_jsx("div", Object.assign({ id: "kc-form-options" }, { children: realm.rememberMe && !usernameHidden && (_jsx("div", Object.assign({ className: "checkbox" }, { children: _jsxs("label", { children: [_jsx("input", { tabIndex: 5, id: "rememberMe", name: "rememberMe", type: "checkbox", defaultChecked: !!login.rememberMe }), " ", msg("rememberMe")] }) }))) })), _jsx("div", Object.assign({ className: kcClsx("kcFormOptionsWrapperClass") }, { children: realm.resetPasswordAllowed && (_jsx("span", { children: _jsx("a", Object.assign({ tabIndex: 6, href: url.loginResetCredentialsUrl }, { children: msg("doForgotPassword") })) })) }))] })), _jsxs("div", Object.assign({ id: "kc-form-buttons", className: kcClsx("kcFormGroupClass") }, { children: [_jsx("input", { type: "hidden", id: "id-hidden-input", name: "credentialId", value: auth.selectedCredential }), _jsx("input", { tabIndex: 7, disabled: isLoginButtonDisabled, className: kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass"), name: "login", id: "kc-login", type: "submit", value: msgStr("doLogIn") })] }))] }))) })) })) })));
+}
+function PasswordWrapper(props) {
+    const { kcClsx, i18n, passwordInputId, children } = props;
+    const { msgStr } = i18n;
+    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
+    return (_jsxs("div", Object.assign({ className: kcClsx("kcInputGroup") }, { children: [children, _jsx("button", Object.assign({ type: "button", className: kcClsx("kcFormPasswordVisibilityButtonClass"), "aria-label": msgStr(isPasswordRevealed ? "hidePassword" : "showPassword"), "aria-controls": passwordInputId, onClick: toggleIsPasswordRevealed }, { children: _jsx("i", { className: kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow"), "aria-hidden": true }) }))] })));
+}
+//# sourceMappingURL=Login.js.map

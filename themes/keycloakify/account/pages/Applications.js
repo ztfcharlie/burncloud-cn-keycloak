@@ -1,0 +1,23 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { getKcClsx } from "../../account/lib/kcClsx";
+export default function Applications(props) {
+    const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
+    const { kcClsx } = getKcClsx({
+        doUseDefaultCss,
+        classes
+    });
+    const { url, applications: { applications }, stateChecker } = kcContext;
+    const { msg, advancedMsg } = i18n;
+    return (_jsx(Template, Object.assign({}, { kcContext, i18n, doUseDefaultCss, classes }, { active: "applications" }, { children: _jsxs("div", Object.assign({ className: "row" }, { children: [_jsx("div", Object.assign({ className: "col-md-10" }, { children: _jsx("h2", { children: msg("applicationsHtmlTitle") }) })), _jsxs("form", Object.assign({ action: url.applicationsUrl, method: "post" }, { children: [_jsx("input", { type: "hidden", id: "stateChecker", name: "stateChecker", value: stateChecker }), _jsx("input", { type: "hidden", id: "referrer", name: "referrer", value: stateChecker }), _jsxs("table", Object.assign({ className: "table table-striped table-bordered" }, { children: [_jsx("thead", { children: _jsxs("tr", { children: [_jsx("td", { children: msg("application") }), _jsx("td", { children: msg("availableRoles") }), _jsx("td", { children: msg("grantedPermissions") }), _jsx("td", { children: msg("additionalGrants") }), _jsx("td", { children: msg("action") })] }) }), _jsx("tbody", { children: applications.map(application => (_jsxs("tr", { children: [_jsxs("td", { children: [application.effectiveUrl && (_jsx("a", Object.assign({ href: application.effectiveUrl }, { children: (application.client.name && advancedMsg(application.client.name)) || application.client.clientId }))), !application.effectiveUrl &&
+                                                        ((application.client.name && advancedMsg(application.client.name)) || application.client.clientId)] }), _jsxs("td", { children: [!isArrayWithEmptyObject(application.realmRolesAvailable) &&
+                                                        application.realmRolesAvailable.map((role, index) => (_jsxs("span", { children: [role.description ? advancedMsg(role.description) : advancedMsg(role.name), index < application.realmRolesAvailable.length - 1 && ", "] }, role.name))), application.resourceRolesAvailable &&
+                                                        Object.keys(application.resourceRolesAvailable).map(resource => (_jsxs("span", { children: [!isArrayWithEmptyObject(application.realmRolesAvailable) && ", ", application.resourceRolesAvailable[resource].map(clientRole => (_jsxs("span", { children: [clientRole.roleDescription
+                                                                            ? advancedMsg(clientRole.roleDescription)
+                                                                            : advancedMsg(clientRole.roleName), " ", msg("inResource"), " ", _jsx("strong", { children: clientRole.clientName ? advancedMsg(clientRole.clientName) : clientRole.clientId }), clientRole !==
+                                                                            application.resourceRolesAvailable[resource][application.resourceRolesAvailable[resource].length - 1] && ", "] }, clientRole.roleName)))] }, resource)))] }), _jsx("td", { children: application.client.consentRequired ? (application.clientScopesGranted.map(claim => (_jsxs("span", { children: [advancedMsg(claim), claim !== application.clientScopesGranted[application.clientScopesGranted.length - 1] && ", "] }, claim)))) : (_jsx("strong", { children: msg("fullAccess") })) }), _jsx("td", { children: application.additionalGrants.map(grant => (_jsxs("span", { children: [advancedMsg(grant), grant !== application.additionalGrants[application.additionalGrants.length - 1] && ", "] }, grant))) }), _jsx("td", { children: (application.client.consentRequired && application.clientScopesGranted.length > 0) ||
+                                                    application.additionalGrants.length > 0 ? (_jsx("button", Object.assign({ type: "submit", className: kcClsx("kcButtonPrimaryClass", "kcButtonClass"), id: `revoke-${application.client.clientId}`, name: "clientId", value: application.client.id }, { children: msg("revoke") }))) : null })] }, application.client.clientId))) })] }))] }))] })) })));
+}
+function isArrayWithEmptyObject(variable) {
+    return Array.isArray(variable) && variable.length === 1 && typeof variable[0] === "object" && Object.keys(variable[0]).length === 0;
+}
+//# sourceMappingURL=Applications.js.map
