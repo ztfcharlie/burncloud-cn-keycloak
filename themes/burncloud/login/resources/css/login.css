@@ -1,0 +1,373 @@
+/**
+ * BurnCloud AI Keycloak Theme - Login Page Styles
+ * Matching the Next.js frontend sign-in page design
+ * Version: 1.0.0
+ */
+
+/* ===== LOGIN CONTAINER SPECIFIC STYLES ===== */
+.burncloud-login-container {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Enhanced login card for better visual impact */
+.burncloud-login-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.burncloud-login-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--primary) / 0.8) 50%, 
+        hsl(var(--primary)) 100%);
+}
+
+/* ===== ENHANCED FORM STYLES ===== */
+.form-input:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    background: hsl(var(--background));
+}
+
+.form-input[aria-invalid="true"] {
+    border-color: hsl(var(--destructive));
+    background: hsl(var(--destructive) / 0.05);
+}
+
+.form-input[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px hsl(var(--destructive) / 0.1);
+}
+
+/* Password field enhancements */
+.form-input[type="password"] {
+    font-family: text-security-disc; /* For better password display */
+    letter-spacing: 0.1em;
+}
+
+/* ===== ENHANCED BUTTON STYLES ===== */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--primary) / 0.9) 100%);
+    transition: all 0.2s ease;
+}
+
+.btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, 
+        hsl(var(--primary) / 0.9) 0%, 
+        hsl(var(--primary) / 0.8) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== LOADING STATE ===== */
+.btn-primary.loading {
+    pointer-events: none;
+}
+
+.btn-primary.loading::after {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: hsl(var(--primary-foreground));
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ===== ENHANCED CHECKBOX STYLES ===== */
+.checkbox-container input[type="checkbox"] {
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 2px solid hsl(var(--border));
+    border-radius: calc(var(--radius) - 4px);
+    background: hsl(var(--background));
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: hsl(var(--primary-foreground));
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.checkbox-container input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+/* ===== ENHANCED SOCIAL BUTTONS ===== */
+.social-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.social-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        hsl(var(--muted) / 0.5), 
+        transparent);
+    transition: left 0.3s;
+}
+
+.social-button:hover::before {
+    left: 100%;
+}
+
+.social-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+/* Google Button Specific */
+.social-button#social-google {
+    border-color: #4285f4;
+}
+
+.social-button#social-google:hover {
+    background: #4285f4;
+    color: white;
+}
+
+/* GitHub Button Specific */
+.social-button#social-github {
+    border-color: #333;
+}
+
+.social-button#social-github:hover {
+    background: #333;
+    color: white;
+}
+
+/* ===== ENHANCED ERROR STATES ===== */
+.input-error {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    animation: slideInError 0.3s ease-out;
+}
+
+.input-error::before {
+    content: "⚠️";
+    font-size: 0.75rem;
+}
+
+/* ===== FORM FOCUS MANAGEMENT ===== */
+.form-group:focus-within .form-label {
+    color: hsl(var(--primary));
+    transition: color 0.2s ease;
+}
+
+/* ===== ENHANCED REGISTRATION SECTION ===== */
+.registration-section {
+    position: relative;
+}
+
+.registration-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3rem;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        hsl(var(--border)), 
+        transparent);
+}
+
+.registration-text {
+    margin-top: 1rem;
+}
+
+/* ===== FORGOT PASSWORD ENHANCEMENTS ===== */
+.forgot-password-link {
+    position: relative;
+    font-weight: 500;
+}
+
+.forgot-password-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: hsl(var(--primary));
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.forgot-password-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+.form-input:focus,
+.btn:focus,
+.social-button:focus,
+.checkbox-container input:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .btn-primary::before,
+    .social-button::before {
+        display: none;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .form-input {
+        border-width: 2px;
+    }
+    
+    .btn-primary {
+        border: 2px solid hsl(var(--primary));
+    }
+    
+    .social-button {
+        border-width: 2px;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInError {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ENHANCEMENTS ===== */
+@media (max-width: 480px) {
+    .burncloud-login-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .login-title {
+        font-size: 1.25rem;
+    }
+    
+    .social-buttons {
+        gap: 0.5rem;
+    }
+    
+    .social-button {
+        padding: 0.625rem;
+        font-size: 0.8rem;
+    }
+    
+    .form-input {
+        padding: 0.625rem;
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .social-providers,
+    .burncloud-header,
+    .burncloud-footer {
+        display: none;
+    }
+    
+    .burncloud-login-card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
