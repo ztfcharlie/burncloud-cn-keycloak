@@ -8,12 +8,6 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <#if properties.meta?has_content>
-        <#list properties.meta?split(' ') as meta>
-            <meta name="${meta?split('=')[0]}" content="${meta?split('=')[1]}"/>
-        </#list>
-    </#if>
-    
     <title>${msg("loginTitle")} - BurnCloud AI</title>
     
     <!-- Favicon -->
@@ -87,6 +81,47 @@
             --popover: 214 50% 6%;
             --popover-foreground: 0 0% 100%;
         }
+        /* Theme Switcher Styles */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-switcher {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: var(--radius);
+            color: var(--foreground);
+            background-color: var(--background);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .sun-icon, .moon-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .dark .sun-icon {
+            display: none;
+        }
+
+        html:not(.dark) .moon-icon {
+            display: none;
+        }
     </style>
 </head>
 
@@ -138,9 +173,8 @@
         <footer class="burncloud-footer">
             <div class="footer-content">
                 <div class="footer-links">
-                    <a href="#" class="footer-link">${msg("terms")}</a>
-                    <a href="#" class="footer-link">${msg("privacy")}</a>
-                    <a href="#" class="footer-link">${msg("support")}</a>
+                    <a href="https://www.burncloud.cn/terms" class="footer-link">${msg("terms")}</a>
+                    <a href="https://www.burncloud.cn/privacy" class="footer-link">${msg("privacy")}</a>
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; 2024 BurnCloud AI Platform. All rights reserved.</p>
@@ -153,6 +187,38 @@
     <script>
         // Initialize BurnCloud theme
         document.addEventListener('DOMContentLoaded', function() {
+            if (typeof BurnCloudTheme !== 'undefined') {
+                BurnCloudTheme.init();
+            }
+        });
+        
+        // Language switching function
+        function changeLanguage(locale) {
+            const url = new URL(window.location);
+            url.searchParams.set('kc_locale', locale);
+            window.location.href = url.toString();
+        }
+         // Initialize BurnCloud theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const html = document.documentElement;
+            
+            // Check for saved theme preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Set initial theme
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                html.classList.add('dark');
+            }
+            
+            // Theme toggle handler
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                const isDark = html.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
             if (typeof BurnCloudTheme !== 'undefined') {
                 BurnCloudTheme.init();
             }
