@@ -92,7 +92,7 @@ body {
     gap: 1rem;
 }
 
-/* 语言选择器样式 */
+/* ===== 语言选择器样式 ===== */
 .language-selector {
     position: relative;
 }
@@ -112,6 +112,7 @@ body {
     border-radius: var(--radius);
     cursor: pointer;
     transition: all 0.2s ease;
+    color: hsl(var(--foreground));
 }
 
 .dropdown-selected:hover {
@@ -147,6 +148,7 @@ body {
     padding: 8px 12px;
     cursor: pointer;
     transition: all 0.2s ease;
+    color: hsl(var(--foreground));
 }
 
 .dropdown-option:hover {
@@ -161,16 +163,6 @@ body {
 /* 暗色主题适配 */
 .dark .dropdown-selected {
     background: hsl(var(--card));
-}
-
-.dark .dropdown-options {
-    background: hsl(var(--card));
-}
-
-/* Dark Theme Custom Dropdown */
-.dark .dropdown-selected {
-    background: hsl(var(--card));
-    color: hsl(var(--foreground));
     border-color: hsl(var(--border));
 }
 
