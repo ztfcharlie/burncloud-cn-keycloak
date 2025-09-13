@@ -1,7 +1,7 @@
 <#import "template.ftl" as layout>
 <@layout.registrationLayout displayMessage=false; section>
     <#if section = "header">
-        <#if message?has_content>
+        <#if message?? && message.summary??>
             ${message.summary}
         <#else>
             ${msg("errorTitle")}
@@ -9,7 +9,7 @@
     <#elseif section = "form">
         <div id="kc-error-message">
             <p class="instruction">
-                <#if message?has_content>
+                <#if message?? && message.summary??>
                     ${message.summary}
                 <#else>
                     ${msg("errorTitle")}
