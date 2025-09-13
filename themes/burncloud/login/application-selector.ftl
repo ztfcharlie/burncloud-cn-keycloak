@@ -140,6 +140,21 @@
                         "roles": ["keycloak-admin", "super-admin"]
                     },
                     {
+                        "id": "discourse-admin",
+                        "name": {
+                            "zh-CN": "${msg('app.discourse.name')}",
+                            "en": "${msg('app.discourse.name')}"
+                        },
+                        "description": {
+                            "zh-CN": "${msg('app.discourse.description')}",
+                            "en": "${msg('app.discourse.description')}"
+                        },
+                        "url": "https://testcommunity.burncloud.cn/admin",
+                        "icon": "🛡️",
+                        "color": "info",
+                        "roles": ["discourse-admin", "super-admin"]
+                    },
+                    {
                         "id": "system-settings",
                         "name": {
                             "zh-CN": "${msg('app.system.name')}",
