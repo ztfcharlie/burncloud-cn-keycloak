@@ -110,12 +110,6 @@
             background-color: var(--secondary);
         }
 
-        /* Language Selector Styles */
-        .language-selector {
-            display: flex;
-            align-items: center;
-        }
-
         .sun-icon, .moon-icon {
             width: 1.5rem;
             height: 1.5rem;
@@ -194,19 +188,6 @@
     <script>
         // Initialize BurnCloud theme
         document.addEventListener('DOMContentLoaded', function() {
-            if (typeof BurnCloudTheme !== 'undefined') {
-                BurnCloudTheme.init();
-            }
-        });
-        
-        // Language switching function
-        function changeLanguage(locale) {
-            const url = new URL(window.location);
-            url.searchParams.set('kc_locale', locale);
-            window.location.href = url.toString();
-        }
-         // Initialize BurnCloud theme
-        document.addEventListener('DOMContentLoaded', function() {
             const themeToggle = document.getElementById('theme-toggle');
             const html = document.documentElement;
             
@@ -225,18 +206,7 @@
                 const isDark = html.classList.contains('dark');
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });
-
-            if (typeof BurnCloudTheme !== 'undefined') {
-                BurnCloudTheme.init();
-            }
         });
-        
-        // Language switching function
-        function changeLanguage(locale) {
-            const url = new URL(window.location);
-            url.searchParams.set('kc_locale', locale);
-            window.location.href = url.toString();
-        }
     </script>
 </body>
 </html>

@@ -48,13 +48,6 @@
          * Set up global event listeners
          */
         setupEventListeners: function() {
-            // DOM content loaded
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', this.init.bind(this));
-            } else {
-                this.init();
-            }
-
             // Form submissions
             this.setupFormHandling();
 
