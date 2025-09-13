@@ -4,6 +4,130 @@
  * Version: 1.0.0
  */
 
+/* ===== CSS VARIABLES ===== */
+:root {
+    /* BurnCloud Color System */
+    --primary: 214 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 214 100% 11%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 214 5% 39%;
+    --accent: 214 32% 91%;
+    --accent-foreground: 214 100% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 214 100% 59%;
+    --background: 0 0% 100%;
+    --foreground: 214 100% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 214 100% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 100% 11%;
+    
+    /* Radius */
+    --radius: 0.6rem;
+    
+    /* Font Family */
+    --font-family: 'Manrope', sans-serif;
+}
+
+.dark {
+    --primary: 214 100% 59%;
+    --primary-foreground: 214 100% 11%;
+    --secondary: 214 13% 9%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 214 13% 9%;
+    --muted-foreground: 214 5% 63%;
+    --accent: 214 13% 9%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 13% 9%;
+    --input: 214 13% 9%;
+    --ring: 214 100% 59%;
+    --background: 214 100% 4%;
+    --foreground: 0 0% 100%;
+    --card: 214 50% 6%;
+    --card-foreground: 0 0% 100%;
+    --popover: 214 50% 6%;
+    --popover-foreground: 0 0% 100%;
+}
+
+/* ===== THEME SWITCHER STYLES ===== */
+.burncloud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+.burncloud-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.theme-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: var(--radius);
+    color: var(--foreground);
+    transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--secondary);
+}
+
+/* ===== LANGUAGE SELECTOR STYLES ===== */
+.language-selector {
+    display: flex;
+    align-items: center;
+}
+
+.language-selector select {
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+}
+
+.sun-icon, .moon-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.dark .sun-icon {
+    display: none;
+}
+
+html:not(.dark) .moon-icon {
+    display: none;
+}
+
 /* ===== CSS RESET & BASE STYLES ===== */
 * {
     margin: 0;
