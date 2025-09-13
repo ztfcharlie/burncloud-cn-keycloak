@@ -24,19 +24,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    
     <!-- Styles -->
-    <#if properties.styles?has_content>
-        <#list properties.styles?split(' ') as style>
-            <link href="${url.resourcesPath}/${style}" rel="stylesheet" />
-        </#list>
-    </#if>
+    <link href="${url.resourcesPath}/css/burncloud-theme.css" rel="stylesheet" />
+    <link href="${url.resourcesPath}/css/application-selector.css" rel="stylesheet" />
+    <link href="${url.resourcesPath}/css/login.css" rel="stylesheet" />
     
     <!-- Scripts -->
-    <#if properties.scripts?has_content>
-        <#list properties.scripts?split(' ') as script>
-            <script src="${url.resourcesPath}/${script}" type="text/javascript"></script>
-        </#list>
-    </#if>
+    <script src="${url.resourcesPath}/js/theme-core.js" type="text/javascript"></script>
+    <script src="${url.resourcesPath}/js/application-selector.js" type="text/javascript"></script>
+    <script src="${url.resourcesPath}/js/role-manager.js" type="text/javascript"></script>
     
     <!-- Theme Variables -->
     <style>
