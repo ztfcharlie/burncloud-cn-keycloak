@@ -221,3 +221,17 @@ docker-compose exec burncloud-cn-keycloak curl -I http://localhost:8080
 
 ---
 **注意**: 这是一个为BurnCloud CN平台特别配置的Keycloak实例。在生产环境中部署前，请务必修改所有默认密码和安全设置。
+
+
+
+内容创作团队 → strapi-admin
+- 负责官网内容、博客文章、新闻发布
+
+社区运营团队 → discourse-admin  
+- 负责社区管理、用户互动、内容审核
+
+技术运维团队 → keycloak-admin
+- 负责用户账户、权限分配、技术支持
+
+系统架构师/CTO → super-admin
+- 负责整体系统管理和配置
