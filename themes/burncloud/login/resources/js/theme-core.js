@@ -1,3 +1,4 @@
+
 /**
  * BurnCloud AI Keycloak Theme - Core JavaScript Module
  * Provides core functionality for theme initialization and management
@@ -48,6 +49,13 @@
          * Set up global event listeners
          */
         setupEventListeners: function() {
+            // DOM content loaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', this.init.bind(this));
+            } else {
+                this.init();
+            }
+
             // Form submissions
             this.setupFormHandling();
 
@@ -455,16 +463,6 @@
                     options.classList.remove('open');
                     selected.querySelector('.dropdown-arrow').classList.remove('open');
                     
-                    // Change language
-                    const language = option.getAttribute('data-value');
-                    this.changeLanguage(language);
-                });
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', () => {
-                options.classList.remove('open');
-                selected.querySelector('.dropdown-arrow').classList.remove('open');
             });
             
             // Close dropdown on escape key
@@ -487,6 +485,7 @@
             const url = new URL(window.location);
             url.searchParams.set('kc_locale', locale);
             window.location.href = url.toString();
+        },
         }
     };
 

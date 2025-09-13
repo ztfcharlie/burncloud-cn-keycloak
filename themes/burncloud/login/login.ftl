@@ -3,42 +3,32 @@
     <#if section = "header">
         <div class="burncloud-header">
             <div class="burncloud-logo">
-                <img src="${url.resourcesPath}/img/burncloud-logo.png" alt="BurnCloud AI" class="logo-image">
+                <img src="${url.resourcesPath}/img/burncloud-logo.svg" alt="BurnCloud AI" class="logo-image">
                 <span class="logo-text">BurnCloud AI</span>
             </div>
-            <div class="header-controls">
-                <div class="theme-switcher">
-                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
-                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                        </svg>
-                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="language-selector">
-                    <div class="custom-dropdown" id="language-dropdown">
-                        <div class="dropdown-selected" id="dropdown-selected">
-                            <span class="selected-text"><#if locale.current == 'zh-CN'>中文<#else>English</#if></span>
-                            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </div>
-                        <div class="dropdown-options" id="dropdown-options">
-                            <div class="dropdown-option <#if locale.current == 'zh-CN'>selected</#if>" data-value="zh-CN">中文</div>
-                            <div class="dropdown-option <#if locale.current == 'en'>selected</#if>" data-value="en">English</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="theme-switcher">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="language-selector">
+                <select id="language-selector" onchange="changeLanguage(this.value)">
+                    <option value="zh-CN" <#if locale.current == 'zh-CN'>selected</#if>>中文</option>
+                    <option value="en" <#if locale.current == 'en'>selected</#if>>English</option>
+                </select>
             </div>
         </div>
     <#elseif section = "form">
