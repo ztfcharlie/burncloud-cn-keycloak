@@ -51,7 +51,7 @@
   "starttls": "true",
   "auth": "true"
 },
-"loginTheme": "keycloak",
+"loginTheme": "burncloud",
 "accountTheme": "keycloak.v2",
 "adminTheme": "keycloak.v2",
 "emailTheme": "keycloak",
@@ -161,27 +161,27 @@
     },
     {
       "name": "super-admin",
-      "description": "³¬¼¶¹ÜÀíÔ± - ÓµÓÐËùÓÐÈ¨ÏÞ"
+      "description": "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô± - Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     },
     {
       "name": "content-manager",
-      "description": "ÄÚÈÝ¹ÜÀíÔ± - StrapiÄÚÈÝ¹ÜÀíÈ¨ÏÞ"
+      "description": "ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½Ô± - Strapiï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     },
     {
       "name": "forum-moderator",
-      "description": "ÂÛÌ³°æÖ÷ - Discourse¹ÜÀíÈ¨ÏÞ"
+      "description": "ï¿½ï¿½Ì³ï¿½ï¿½ï¿½ï¿½ - Discourseï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     },
     {
       "name": "commerce-admin",
-      "description": "ÉÌ³Ç¹ÜÀíÔ± - ÉÌ³ÇÏµÍ³¹ÜÀíÈ¨ÏÞ"
+      "description": "ï¿½Ì³Ç¹ï¿½ï¿½ï¿½Ô± - ï¿½Ì³ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     },
     {
       "name": "regular-user",
-      "description": "ÆÕÍ¨ÓÃ»§ - »ù´¡ä¯ÀÀºÍ»¥¶¯È¨ÏÞ"
+      "description": "ï¿½ï¿½Í¨ï¿½Ã»ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     },
     {
       "name": "developer",
-      "description": "¿ª·¢Õß - API·ÃÎÊÈ¨ÏÞ"
+      "description": "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - APIï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½"
     }
   ]
 },
@@ -221,7 +221,7 @@
   {
     "clientId": "strapi-cms",
     "name": "Strapi CMS Application",
-    "description": "BurnCloud StrapiÄÚÈÝ¹ÜÀíÏµÍ³",
+    "description": "BurnCloud Strapiï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ÏµÍ³",
     "enabled": true,
     "publicClient": true,
     "standardFlowEnabled": true,
@@ -263,7 +263,7 @@
   {
     "clientId": "discourse-community",
     "name": "Discourse Community",
-    "description": "BurnCloudÉçÇøÂÛÌ³ÏµÍ³",
+    "description": "BurnCloudï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ÏµÍ³",
     "enabled": true,
     "publicClient": true,
     "standardFlowEnabled": true,
@@ -303,7 +303,7 @@
   {
     "clientId": "commerce-platform",
     "name": "Commerce Platform",
-    "description": "BurnCloudÉÌ³ÇÏµÍ³£¨Ô¤Áô£©",
+    "description": "BurnCloudï¿½Ì³ï¿½ÏµÍ³ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½",
     "enabled": true,
     "publicClient": true,
     "standardFlowEnabled": true,
