@@ -1,3 +1,4 @@
+
 /**
  * BurnCloud AI Keycloak Theme - Main Stylesheet
  * Matching the Next.js frontend design system
@@ -5,7 +6,6 @@
  */
 
 /* ===== CSS RESET & BASE STYLES ===== */
-
 * {
     margin: 0;
     padding: 0;
@@ -26,57 +26,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-:root {
-            /* BurnCloud Color System */
-            --primary: 214 100% 59%;
-            --primary-foreground: 0 0% 100%;
-            --secondary: 214 32% 91%;
-            --secondary-foreground: 214 100% 11%;
-            --muted: 214 32% 91%;
-            --muted-foreground: 214 5% 39%;
-            --accent: 214 32% 91%;
-            --accent-foreground: 214 100% 11%;
-            --destructive: 0 84% 60%;
-            --destructive-foreground: 0 0% 100%;
-            --border: 214 32% 91%;
-            --input: 214 32% 91%;
-            --ring: 214 100% 59%;
-            --background: 0 0% 100%;
-            --foreground: 214 100% 11%;
-            --card: 0 0% 100%;
-            --card-foreground: 214 100% 11%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 214 100% 11%;
-            
-            /* Radius */
-            --radius: 0.6rem;
-            
-            /* Font Family */
-            --font-family: 'Manrope', sans-serif;
-        }
-        
-        .dark {
-            --primary: 214 100% 59%;
-            --primary-foreground: 214 100% 11%;
-            --secondary: 214 13% 9%;
-            --secondary-foreground: 0 0% 100%;
-            --muted: 214 13% 9%;
-            --muted-foreground: 214 5% 63%;
-            --accent: 214 13% 9%;
-            --accent-foreground: 0 0% 100%;
-            --destructive: 0 63% 31%;
-            --destructive-foreground: 0 0% 100%;
-            --border: 214 13% 9%;
-            --input: 214 13% 9%;
-            --ring: 214 100% 59%;
-            --background: 214 100% 4%;
-            --foreground: 0 0% 100%;
-            --card: 214 50% 6%;
-            --card-foreground: 0 0% 100%;
-            --popover: 214 50% 6%;
-            --popover-foreground: 0 0% 100%;
-        }
 
 /* ===== LAYOUT COMPONENTS ===== */
 .burncloud-layout {
@@ -114,8 +63,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 50;
-    display: flex;
-    width: 100%;
 }
 
 .burncloud-logo {
@@ -147,56 +94,15 @@ body {
     gap: 1rem;
 }
 
-.theme-switcher {
-    display: flex;
-    align-items: center;
-}
-
-.theme-toggle-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-            border-radius: var(--radius);
-            color: var(--foreground);
-            transition: all 0.2s ease;
-}
-
-.theme-toggle-btn:hover {
-            background-color: var(--secondary);
-        }
-
-.language-selector {
-            display: flex;
-            align-items: center;
-        }
-.sun-icon, .moon-icon {
-            width: 1.5rem;
-            height: 1.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        .dark .sun-icon {
-            display: none;
-        }
-
-        html:not(.dark) .moon-icon {
-            display: none;
-        }
-
 .language-selector select {
     padding: 0.5rem 0.75rem;
+    border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-size: 0.875rem;
-    transition: all 0.2s ease;
-    padding: 0.5rem;
-    border: 1px solid var(--border);
-    background-color: var(--background);
-    color: var(--foreground);
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .language-selector select:hover {
@@ -429,6 +335,129 @@ body {
     margin: 1.5rem 0;
     text-align: center;
 }
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: hsl(var(--border));
+}
+
+.divider-text {
+    background: hsl(var(--card));
+    color: hsl(var(--muted-foreground));
+    font-size: 0.875rem;
+    padding: 0 1rem;
+    position: relative;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.social-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.social-button:hover {
+    background: hsl(var(--muted));
+    border-color: hsl(var(--primary));
+}
+
+.social-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.social-icon-text {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-radius: 50%;
+}
+
+/* ===== ALERT STYLES ===== */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+}
+
+.alert-success {
+    background: hsl(142 76% 36% / 0.1);
+    border: 1px solid hsl(142 76% 36% / 0.2);
+    color: hsl(142 84% 24%);
+}
+
+.alert-error {
+    background: hsl(var(--destructive) / 0.1);
+    border: 1px solid hsl(var(--destructive) / 0.2);
+    color: hsl(var(--destructive));
+}
+
+.alert-warning {
+    background: hsl(38 92% 50% / 0.1);
+    border: 1px solid hsl(38 92% 50% / 0.2);
+    color: hsl(25 95% 39%);
+}
+
+.alert-info {
+    background: hsl(var(--primary) / 0.1);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    color: hsl(var(--primary));
+}
+
+.alert-icon {
+    font-size: 1rem;
+}
+
+/* ===== FOOTER STYLES ===== */
+.burncloud-footer {
+    border-top: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
+    padding: 1.5rem 2rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80rem;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
 
 .divider::before {
     content: "";
